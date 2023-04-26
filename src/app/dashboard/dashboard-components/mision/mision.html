@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-content>
+    <mat-card-title>Misión</mat-card-title>
+    <p style="text-align: justify;">
+    <mat-card-subtitle><p>{{mision}}</p></mat-card-subtitle>
+
+  </p>
+  <div *ngIf= "(auth.isAuthenticated$|async)">
+  <mat-form-field class="example-full-width">
+    <textarea #identificador matInput id="imision2"  rows= "6"  value={{mision}} >     </textarea>
+    <div>&nbsp;</div>
+  </mat-form-field>
+    <button  type="button" mat-raised-button color="accent" (click)="save(identificador.value)" (click)="getInfo()">Guardar</button></div>
+</mat-card-content>
+  
+</mat-card>

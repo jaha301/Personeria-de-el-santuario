@@ -1,0 +1,66 @@
+<!-- ============================================================== -->
+<!-- row -->
+<!-- ============================================================== -->
+<style>
+	.logo img {
+	
+	  max-width: 60%;
+	  height: auto;
+	
+	}
+	</style>
+<div fxLayout="row" fxLayoutWrap="wrap">
+		<!-- Card column -->
+		<div fxFlex.gt-sm="100%" fxFlex="100">
+				<mat-card *ngIf= "(auth.isAuthenticated$|async)">
+					<mat-card-content>
+						<mat-card-title>Crear Nueva Noticia</mat-card-title>
+						<form class="example-form">
+							<mat-form-field class="example-full-width">
+							  <mat-label>Titulo de la Noticia</mat-label>
+							  <input #titulo matInput placeholder="Título" >
+							</mat-form-field>
+						  
+							<mat-form-field class="example-full-width">
+							  <mat-label>Descripción de la Noticia </mat-label>
+							  <textarea #noticia matInput placeholder="Noticia"></textarea>
+							</mat-form-field>
+						  </form>
+
+						<div >
+							<mat-label>Imagen:   </mat-label>
+							<input  #imagen type="file" (change)="uploadImagen($event); subirImagen()"> 					
+							<button mat-raised-button color="warn" (click)=" save(url, noticia.value, titulo.value ); geturl();   titulo.value='';noticia.value='';imagen.value='';url=''; mostrar()" style="float: right;">Publicar Noticia</button>	
+							<button (click)=" subirImagen(); getUrl()"  >Subir Imagen</button>
+							<div class="progress" *ngIf="uploadProgress$ | async as progress" >
+							<progress  id="file" max="100" value={{progress}} >  </progress>
+							
+							<div>
+
+								<img  width="100" src="{{url}}">
+								<mat-icon  (click)=" this.url=''" style="float: left;" title="Borrar Imagen">close</mat-icon>
+							</div>
+							</div>
+						
+						<div>&nbsp;</div>
+						
+						
+						</div>
+	
+					</mat-card-content>    
+					
+			 </mat-card>
+			 <ol class="reverse">
+				<mat-card class="post-card" *ngFor="let post of posts$ |async "  >					
+					<mat-card-content>
+					<a *ngIf= "(auth.isAuthenticated$|async)" >
+					<mat-icon  (click)=" borrar(post.id); eliminada()" style="float: right;" title="Eliminar Noticia">delete</mat-icon></a>
+					<mat-card-title>{{post.nombre}}</mat-card-title><mat-label style="float: right;">{{fecha2}}   </mat-label>
+
+					<mat-card-subtitle>{{post.descripcion}}</mat-card-subtitle>
+					<img  width="300" mat-card-image [src]="post.archivo">
+				</mat-card-content>  
+				</mat-card>
+			</ol>
+		</div>    
+</div>    

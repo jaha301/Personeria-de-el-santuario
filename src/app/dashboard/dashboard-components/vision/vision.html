@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-content>
+    <div class="d-flex flex-wrap">
+      <div>
+        <mat-card-title>Visión</mat-card-title>
+        <p style="text-align: justify;">
+        <mat-card-subtitle><p>{{vision}}</p></mat-card-subtitle>
+        
+        <div *ngIf= "(auth.isAuthenticated$|async)">
+          <mat-form-field class="example-full-width">
+          <textarea #identificador1  matInput rows="7" value={{vision}} ></textarea>
+          <div>&nbsp;</div>
+          </mat-form-field>
+          <button  type="button" mat-raised-button color="accent" (click)="save(identificador1.value)" (click)="getInfo()"> Guardar</button>
+        </div>
+             
+      </div>
+
+    </div>
+
+
+  </mat-card-content>
+</mat-card>

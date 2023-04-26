@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "personeriadb"
+  },
+  "targets": {
+    "personeriadb": {
+      "hosting": {
+        "material": [
+          "personeriadb"
+        ]
+      }
+    }
+  }
+}

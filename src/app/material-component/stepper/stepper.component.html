@@ -1,0 +1,76 @@
+
+<!-- ============================================================== -->
+<!-- row -->
+<!-- ============================================================== -->
+<div fxLayout="row" fxLayoutWrap="wrap">
+	<!-- Card column -->
+	<div fxFlex.gt-sm="100%" fxFlex="100">
+		<mat-card>
+			<mat-card-content>
+				<mat-card-title><span class="bg-success text-white rounded font-12 p-l-5 p-r-5">Contáctenos</span></mat-card-title>
+				<mat-card-subtitle> </mat-card-subtitle>		
+				<mat-card-subtitle>Complete el formulario para envíar su solicitud a la Personería</mat-card-subtitle>
+				<mat-vertical-stepper [linear]="isLinearvarient" #steppervarient class="m-t-20">
+				<form  >
+				  <mat-step [stepControl]="varientfirstFormGroup">
+				    <form [formGroup]="varientfirstFormGroup">
+						<ng-template matStepLabel>Nombre Completo</ng-template>
+						<mat-form-field>
+						  <input name="Nombre" value='' #nombres matInput placeholder="Nombres y Apellidos" formControlName="varientfirstCtrl" required>
+						</mat-form-field>
+						<div>
+						  <button mat-raised-button matStepperNext color="accent"  >Siguiente</button>
+						</div> 
+				    </form>
+				  </mat-step>
+				  <mat-step [stepControl]="varientsecondFormGroup">
+				    <form [formGroup]="varientsecondFormGroup">
+						<ng-template matStepLabel>Teléfono Celular</ng-template>
+						<mat-form-field>
+						  <input name="Celular" value='' #celular matInput placeholder="Celular"  formControlName="varientsecondCtrl" required>
+						</mat-form-field>
+						<div class="button-row"> 
+						  <button mat-raised-button color="primary" matStepperPrevious>Atras</button>
+						  <button  mat-raised-button color="accent" matStepperNext (click)="nombre2.value=nombres.value" (click)="celular2.value=celular.value">Siguiente</button>
+						</div>
+				    </form>
+				  </mat-step>
+				  <mat-step [stepControl]="varientthirdFormGroup">
+				    <form  name="formulario" #formulario1 action="https://formspree.io/f/xleklpby" method="POST" [formGroup]="varientthirdFormGroup">
+				    <ng-template matStepLabel>Solicitud</ng-template>
+				    <p>Detalle su solicitud a continuación:</p>
+
+					<div hidden>
+					<input name="Nombre" #nombre2 required="required">
+					<input name="Celular" #celular2 required="required">
+					</div>
+
+					<textarea name="Solicitud" value='' #solicitud matInput placeholder="Solicitud" rows= '4' formControlName="varientthirdCtrl" required></textarea>
+					<div class="button-row">
+						<button mat-raised-button color="primary" matStepperPrevious>Atrás</button>
+				
+						 <button *ngIf="celular.value!='' && nombres.value!='' && solicitud.value!=''; else mensaje"  mat-raised-button color="warn" type="reset"   (click)="nombre2.value=nombres.value" (click)="celular2.value=celular.value"  (click)="setSolicitud(celular.value, nombres.value)"  (click)="formulario1.submit()" >Enviar</button>
+											
+						<ng-template #mensaje> * Por favor llenar todos los campos para poder enviar su solicitud 
+						  </ng-template> 
+					  </div>
+					</form>
+				</mat-step>
+			</form>
+				</mat-vertical-stepper>
+			</mat-card-content>
+		</mat-card>    
+	</div>
+</div>
+
+
+<!-- ============================================================== -->
+<!-- row -->
+<!-- ============================================================== -->
+
+
+
+
+
+
+
